@@ -1226,6 +1226,12 @@ variable "ip_set_rules" {
   default = []
 }
 
+variable "geo_restriction" {
+  description = "If custom rule group 'geo' should be created and added."
+  type = bool
+  default = false
+}
+
 variable "force_delete_bucket" {
   description = "Force delete S3 buckets"
   type = bool
@@ -1235,4 +1241,16 @@ variable "force_delete_bucket" {
 variable "ha_squid_single_instance" {
   description = "If true, deploy a single instance of squid in an autoscaling group"
   default     = false
+}
+
+variable "performance_insights_enabled" {
+  description = "Specifies whether to enable Performance Insights for the DB cluster"
+  type        = bool
+  default     = false
+}
+
+variable "database_insights_mode" {
+  description = "The mode of Database Insights"
+  type        = string
+  default     = "standard"
 }
