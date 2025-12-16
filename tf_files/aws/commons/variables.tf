@@ -359,6 +359,12 @@ variable "fence-bot_bucket_access_arns" {
   default     = []
 }
 
+variable "gearbox-bot_bucket_access_arns" {
+  description = "When gearbox bot has to access another bucket that wasn't created by the VPC module"
+  type        = "list"
+  default     = []
+}
+
 variable "deploy_ha_squid" {
   description = "Should you want to deploy HA-squid"
   default     = false
@@ -436,6 +442,12 @@ variable "customer_id" {
 
 variable "fips" {
   default = false
+}
+
+variable "gearbox_allowed_origins" {
+  description = "value for CORS allowed origins for gearbox S3 bucket"
+  type = "list"
+  default = []
 }
 
 variable "ignore_fence_changes" {
@@ -1087,6 +1099,20 @@ variable "fence_secret_key" {
 }
 
 variable "upload_bucket" {
+  default = ""
+}
+
+variable "gearbox_access_key" {
+  default = ""
+  sensitive = true
+}
+
+variable "gearbox_secret_key" {
+  default = ""
+  sensitive = true
+}
+
+variable "gearbox-data-bucket" {
   default = ""
 }
 

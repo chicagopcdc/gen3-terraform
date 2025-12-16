@@ -262,3 +262,15 @@ variable "fence_secret_key" {
 variable "upload_bucket" {
   default = ""
 }
+
+variable "gearbox_access_key" {
+  default = ""
+}
+
+variable "gearbox_secret_key" {
+  default = ""
+}
+
+variable "gearbox-data-bucket" {
+  default = ""
+}

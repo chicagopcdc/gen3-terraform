@@ -45,6 +45,23 @@ output "data-bucket_name" {
   value = module.cdis_vpc.data-bucket_name
 }
 
+output "gearbox-bot_user_secret" {
+  value     = module.cdis_vpc.gearbox-bot_secret
+  sensitive = true
+}
+
+output "gearbox-bot_user_id" {
+  value = module.cdis_vpc.gearbox-bot_id
+}
+
+output "gearbox-match-conditions-bucket_name" {
+  value = "${module.cdis_vpc.gearbox-match-conditions-bucket_name}"
+}
+
+output "gearbox_allowed_origins" {
+  value = "${var.gearbox_allowed_origins}"
+}
+
 output "kubeconfig" {
   value     = module.eks[0].kubeconfig
   sensitive = true

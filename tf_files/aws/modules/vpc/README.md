@@ -65,6 +65,7 @@ There are mandatory variables, and there are a few other optionals that are set 
 | deploy_single_proxy | If you don't want squid HA then set this to true | boolean | true |
 | squid_extra_vars | Additional variables to pass along with the bootstrapscript | list | [] |
 | fence-bot_bucket_access_arns | If fence user needs to access an additional bucket as to what's created in this module | list | [] |
+| gearbox-bot_bucket_access_arns | If Gearbox user needs to access an additional bucket as to what's created in this module | list | [] |
 | deploy_ha_squid | If you want the HA squid cluster | boolean | false |
 | squid_cluster_desired_capasity | If ha squid is enabled and you want to set your own capasity | int | 2 | 
 | squid_cluster_min_size | If ha squid is enabled and you want to set your own min size | int | 1 |
@@ -94,3 +95,7 @@ There are mandatory variables, and there are a few other optionals that are set 
 | fence-bot_id | Fence bot user ID |
 | fence-bot_secret | fence bot user secret |
 | data-bucket_name | Data bucket name |
+| gearbox-bot_id | gearbox bot user ID |
+| gearbox-bot_secret | gearbox bot user secret |
+| gearbox-bucket_name | gearbox bucket name |
+

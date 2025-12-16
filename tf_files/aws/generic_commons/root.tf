@@ -536,5 +536,8 @@ module "gen3_deployment" {
   fence_access_key        = var.fence_access_key
   fence_secret_key        = var.fence_secret_key
   upload_bucket           = var.upload_bucket
+  gearbox_access_key        = var.gearbox_access_key
+  gearbox_secret_key        = var.gearbox_secret_key
+  gearbox-data-bucket           = var.gearbox-data-bucket
   namespace               = var.namespace
 }

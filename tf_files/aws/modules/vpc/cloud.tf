@@ -51,6 +51,20 @@ module "fence-bot-user" {
   bucket_access_arns   = var.fence-bot_bucket_access_arns
 }
 
+module "gearbox-data-bucket" {
+  source               = "../data-bucket-with-versioning"
+  vpc_name             = "${var.vpc_name}"
+  environment          = "${var.vpc_name}"
+  gearbox_allowed_origins = "${var.gearbox_allowed_origins}"
+}
+
+module "gearbox-bot-user" {
+  source               = "../gearbox-bot-user"
+  vpc_name             = "${var.vpc_name}"
+  bucket_name          = "${module.gearbox-data-bucket.data-bucket-with-versioning_name}"
+  bucket_access_arns   = "${var.gearbox-bot_bucket_access_arns}"
+}
+
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr_block
   enable_dns_hostnames = true

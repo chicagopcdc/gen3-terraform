@@ -91,6 +91,10 @@ variable "aws_user_key_id" {}
 
 variable "indexd_prefix" {}
 
+variable "gearbox-bot_user_secret" {}
+variable "gearbox-bot_user_id" {}
+variable "gearbox-match-conditions-bucket_name" {}
+
 ## Mailgun variable defaults/definitions.
 variable "mailgun_api_key" {}
 

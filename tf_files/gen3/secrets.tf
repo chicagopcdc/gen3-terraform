@@ -20,6 +20,9 @@ resource "aws_secretsmanager_secret_version" "fence_config" {
         fence_access_key      = var.fence_access_key
         fence_secret_key      = var.fence_secret_key
         upload_bucket         = var.upload_bucket
+        gearbox_access_key      = var.gearbox_access_key
+        gearbox_secret_key      = var.gearbox_secret_key
+        gearbox-data-bucket         = var.gearbox-data-bucket
         cognito_discovery_url = var.cognito_discovery_url
         cognito_client_id     = var.cognito_client_id
         cognito_client_secret = var.cognito_client_secret

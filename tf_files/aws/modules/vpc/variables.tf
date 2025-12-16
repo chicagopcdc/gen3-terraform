@@ -88,6 +88,18 @@ variable "fence-bot_bucket_access_arns" {
   description = "When fence bot has to access another bucket that wasn't created by the VPC module"
 }
 
+variable "gearbox-bot_bucket_access_arns" {
+  description = "When gearbox bot has to access another bucket that wasn't created by the VPC module"
+  type        = "list"
+  #default     = []
+}
+
+variable "gearbox_allowed_origins" {
+  description = "value for CORS allowed origins for gearbox S3 bucket"
+  type = "list"
+  default = []
+}
+
 variable "deploy_ha_squid" {
   description = "should you want to deploy HA-squid"
   default     = false
