@@ -45,6 +45,19 @@ output "data-bucket_name" {
   value = module.cdis_vpc.data-bucket_name
 }
 
+output "amanuensis-bot_user_secret" {
+  value     = module.cdis_vpc.amanuensis-bot_secret
+  sensitive = true
+}
+
+output "amanuensis-bot_user_id" {
+  value = module.cdis_vpc.amanuensis-bot_id
+}
+
+output "data-release-bucket_name" {
+  value = module.cdis_vpc.data-release-bucket_name
+}
+
 output "kubeconfig" {
   value     = module.eks[0].kubeconfig
   sensitive = true

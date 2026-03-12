@@ -88,6 +88,10 @@ variable "fence-bot_bucket_access_arns" {
   description = "When fence bot has to access another bucket that wasn't created by the VPC module"
 }
 
+variable "amanuensis-bot_bucket_access_arns" {
+  description = "When fence bot has to access another bucket that wasn't created by the VPC module"
+}
+
 variable "deploy_ha_squid" {
   description = "should you want to deploy HA-squid"
   default     = false
