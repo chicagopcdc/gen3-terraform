@@ -124,6 +124,9 @@ module "gen3" {
   fence_access_key         = module.commons.fence-bot_user_id
   fence_secret_key         = module.commons.fence-bot_user_secret
   upload_bucket            = module.commons.data-bucket_name
+  amanuensis_access_key         = module.commons.amanuensis-bot_user_id
+  amanuensis_secret_key         = module.commons.amanuensis-bot_user_secret
+  data_release_bucket            = module.commons.data-bucket_name
   revproxy_arn             = local.revproxy_arn
   useryaml_s3_path         = "s3://${local.user_yaml_bucket_name}/dev/user.yaml"
   deploy_external_secrets  = true
