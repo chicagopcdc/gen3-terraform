@@ -77,7 +77,7 @@ locals {
 
 module "commons" {
   # source = "git::github.com/uc-cdis/gen3-terraform.git//tf_files/aws/commons?ref=bb593106e48b6da5a557df4e9461aa99db8e3b9c"
-  source = "git::github.com/chicagopcdc/gen3-terraform.git//tf_files/aws/commons?ref=3837fddc823a6b3b4251c91e98d6ee7fc28b0ee8"
+  source = "git::github.com/chicagopcdc/gen3-terraform.git//tf_files/aws/commons?ref=829b8161a33f83b485d80c4de52e5b976d919471"
 
   vpc_name                       = local.vpc_name
   vpc_cidr_block                 = "10.10.0.0/20"
@@ -111,7 +111,7 @@ module "commons" {
 
 module "gen3" {
   # source = "git::github.com/uc-cdis/gen3-terraform.git//tf_files/gen3?ref=bb593106e48b6da5a557df4e9461aa99db8e3b9c"
-  source = "git::github.com/chicagopcdc/gen3-terraform.git//tf_files/gen3?ref=3837fddc823a6b3b4251c91e98d6ee7fc28b0ee8"
+  source = "git::github.com/chicagopcdc/gen3-terraform.git//tf_files/gen3?ref=829b8161a33f83b485d80c4de52e5b976d919471"
 
   vpc_name                 = local.vpc_name
   aurora_username          = module.commons.aurora_cluster_master_username
