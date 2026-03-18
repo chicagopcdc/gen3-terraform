@@ -340,6 +340,10 @@ variable "upload_bucket" {
   default = ""
 }
 
+variable "amanuensis_config_path" {
+  default = ""
+}
+
 variable "amanuensis_access_key" {
   default = ""
 }
