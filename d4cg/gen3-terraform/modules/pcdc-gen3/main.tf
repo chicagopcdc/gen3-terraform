@@ -1,9 +1,5 @@
 module "gen3" {
-<<<<<<< HEAD
   source = "../../../../tf_files/gen3"
-=======
-  source = "git::github.com/uc-cdis/gen3-terraform.git//tf_files/gen3?ref=master"
->>>>>>> parent of 4623efb (Revert "Merge pull request #5 from paulmurdoch19/reorganize")
 
   vpc_name                   = var.vpc_name
   aurora_username            = var.aurora_username
@@ -27,11 +23,8 @@ module "gen3" {
   cognito_discovery_url      = var.cognito_discovery_url
   cognito_client_id          = var.cognito_client_id
   cognito_client_secret      = var.cognito_client_secret
-<<<<<<< HEAD
   audit_enabled              = var.audit_enabled
   indexd_enabled             = var.indexd_enabled
   metadata_enabled           = var.metadata_enabled
 
-=======
->>>>>>> parent of 4623efb (Revert "Merge pull request #5 from paulmurdoch19/reorganize")
 }
