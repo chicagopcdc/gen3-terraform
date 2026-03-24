@@ -34,6 +34,7 @@ resource "aws_iam_role" "audit-role" {
 }
 
 resource "aws_iam_role_policy" "audit-role-policy" {
+  count = var.audit_enabled ? 1 : 0
   name = "audit-role-policy"
   role = aws_iam_role.audit-role[0].id
 
