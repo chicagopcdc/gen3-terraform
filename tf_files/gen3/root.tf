@@ -6,7 +6,7 @@ locals {
       arborist_enabled = var.arborist_enabled
       argo_enabled = var.argo_enabled
       audit_enabled = var.audit_enabled
-      audit_service_account = var.audit_enabled ? aws_iam_role.audit-role[0].arn : ""
+      audit_service_account = aws_iam_role.audit-role[0].arn
       aurora_hostname = var.aurora_hostname
       aurora_username = var.aurora_username
       aurora_password = var.aurora_password
