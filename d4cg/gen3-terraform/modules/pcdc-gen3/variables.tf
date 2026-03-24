@@ -118,3 +118,21 @@ variable "data-release-bucket_name" {
   description = "Name of the bucket used for data release, used by amanuensis to export data from the commons"
   default     = ""
 }
+
+variable "audit_enabled" {
+  description = "Enable audit"
+  type        = bool
+  default     = true
+}
+
+variable "indexd_enabled" {
+  description = "Enable indexd"
+  type        = bool
+  default     = true
+}
+
+variable "metadata_enabled" {
+  description = "Enable metadata"
+  type        = bool
+  default     = true
+}
