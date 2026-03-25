@@ -117,7 +117,6 @@ variable "amanuensis_config_path" {
 variable "data-release-bucket_name" {
   description = "Name of the bucket used for data release, used by amanuensis to export data from the commons"
   default     = ""
-<<<<<<< HEAD
 }
 
 variable "audit_enabled" {
@@ -136,6 +135,39 @@ variable "metadata_enabled" {
   description = "Enable metadata"
   type        = bool
   default     = true
-=======
->>>>>>> parent of 4623efb (Revert "Merge pull request #5 from paulmurdoch19/reorganize")
+}
+
+variable "ambassador_enabled" {
+  description = "Enable ambassador"
+  type        = bool
+  default     = true
+}
+
+variable "guppy_enabled" {
+  description = "Enable guppy"
+  type        = bool
+  default     = false
+}
+
+variable "hatchery_enabled" {
+  description = "Enable hatchery"
+  type        = bool
+  default     = true
+}
+
+variable "netpolicy_enabled" {
+  description = "Enable network policy security rules"
+  type        = bool
+  default     = false
+}
+
+variable "tier_access_limit" {
+  description = "value for tier access limit"
+  default     = "100"
+}
+
+variable "usersync_enabled" {
+  description = "Enable usersync cronjob"
+  type        = bool
+  default     = true
 }

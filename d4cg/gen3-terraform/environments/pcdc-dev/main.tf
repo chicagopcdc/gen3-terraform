@@ -110,7 +110,7 @@ module "gen3" {
   aurora_username          = module.commons.aurora_cluster_master_username
   aurora_password          = module.commons.aurora_cluster_master_password
   aurora_hostname          = module.commons.aurora_cluster_writer_endpoint
-  dictionary_url           = "https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json"
+  dictionary_url           = "https://pcdc-staging-dictionaries.s3.amazonaws.com/pcdc-schema-staging-20250114.json"
   es_endpoint              = module.commons.es_endpoint != null ? module.commons.es_endpoint : ""
   hostname                 = local.hostname
   cluster_endpoint         = module.commons.eks_cluster_endpoint
@@ -134,6 +134,12 @@ module "gen3" {
   audit_enabled            = false
   indexd_enabled           = false
   metadata_enabled         = false
+  ambassador_enabled       = false
+  guppy_enabled            = false
+  hatchery_enabled         = false
+  netpolicy_enabled        = true
+  tier_access_limit        = 5
+  usersync_enabled         = false
   providers = {
     helm       = helm
     kubernetes = kubernetes

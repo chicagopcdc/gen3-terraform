@@ -26,5 +26,12 @@ module "gen3" {
   audit_enabled              = var.audit_enabled
   indexd_enabled             = var.indexd_enabled
   metadata_enabled           = var.metadata_enabled
+  ambassador_enabled         = var.ambassador_enabled
+  guppy_enabled              = var.guppy_enabled
+  hatchery_enabled           = var.hatchery_enabled
+  netpolicy_enabled          = var.netpolicy_enabled
+  tier_access_limit          = var.tier_access_limit
+  usersync_enabled           = var.usersync_enabled
+
 
 }

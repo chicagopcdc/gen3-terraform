@@ -215,6 +215,7 @@ resource "aws_iam_role" "hatchery-role" {
 }
 
 resource "aws_iam_role_policy" "hatchery-role-policy" {
+    count = var.hatchery_enabled ? 1 : 0
   name = "hatchery-role-policy"
   role = aws_iam_role.hatchery-role[0].id
 
