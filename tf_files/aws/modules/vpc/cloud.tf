@@ -51,6 +51,38 @@ module "fence-bot-user" {
   bucket_access_arns   = var.fence-bot_bucket_access_arns
 }
 
+module "data-release-bucket" {
+  source                 = "../s3-bucket"
+  bucket_name            = "${var.vpc_name}-data-release-bucket"
+  environment            = var.vpc_name
+  cloud_trail_count      = 0
+}
+
+resource "aws_s3_bucket_versioning" "data-release-bucket" {
+  bucket = module.data-release-bucket.bucket_name
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "data-release-bucket" {
+  bucket = module.data-release-bucket.bucket_name
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+module "amanuensis-bot-user" {
+  source               = "../bot-user"
+  vpc_name             = var.vpc_name
+  bot_name             = "amanuensis"
+  bucket_name          = module.data-release-bucket.bucket_name
+  bucket_access_arns   = var.amanuensis-bot_bucket_access_arns
+}
+
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr_block
   enable_dns_hostnames = true

@@ -70,6 +70,18 @@ output "data-bucket_name" {
   value = module.data-bucket.data-bucket_name
 }
 
+output "amanuensis-bot_id" {
+  value = module.amanuensis-bot-user.bot_id
+}
+
+output "amanuensis-bot_secret" {
+  value = module.amanuensis-bot-user.bot_secret
+}
+
+output "data-release-bucket_name" {
+  value = module.data-release-bucket.bucket_name
+}
+
 output "squid_auto" {
   value = module.squid-auto.squid_auto-name
 }
