@@ -131,3 +131,12 @@ variable "deploy_es_role" {
 variable "deploy_es" {
   default = true
 }
+
+variable "peering_cidr" {
+  default = "10.128.0.0/20"
+}
+
+variable "ha_squid_single_instance" {
+  description = "If true, deploy a single instance of squid in an autoscaling group"
+  default     = false
+}

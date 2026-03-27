@@ -74,7 +74,8 @@ echo exit 0 | sudo tee -a /etc/rc.local
 mkdir /etc/squid/ssl
 openssl genrsa -out /etc/squid/ssl/squid.key 2048
 openssl req -new -key /etc/squid/ssl/squid.key -out /etc/squid/ssl/squid.csr -subj '/C=XX/ST=XX/L=squid/O=squid/CN=squid'
-openssl x509 -req -days 3650 -in /etc/squid/ssl/squid.csr -signkey /etc/squid/ssl/squid.key -out /etc/squid/ssl/squid.crt
+openssl x509 -req -days 3650 -in /etc/squid/ssl/squid.csr -signkey /etc/squid/ssl/squid.key -out /etc/squid/ssl/squid.crt \
+  -extfile <(printf "[v3_ca]\nsubjectKeyIdentifier=hash\nauthorityKeyIdentifier=keyid:always,issuer\nbasicConstraints=critical,CA:true\nkeyUsage=critical,digitalSignature,cRLSign,keyCertSign")
 cat /etc/squid/ssl/squid.key /etc/squid/ssl/squid.crt | sudo tee /etc/squid/ssl/squid.pem
 mv /tmp/squid.service /etc/systemd/system/
 chmod 0755 /etc/systemd/system/squid.service

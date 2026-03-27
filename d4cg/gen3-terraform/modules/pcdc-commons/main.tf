@@ -30,6 +30,8 @@ module "commons" {
   enable_vpc_endpoints=var.enable_vpc_endpoints
   deploy_es=var.deploy_es
   deploy_es_role=var.deploy_es_role
+  peering_cidr = var.peering_cidr
+  ha_squid_single_instance = var.ha_squid_single_instance
 }
 
 module "amanuensis-data-release-bucket" {
