@@ -144,9 +144,9 @@ EOF
 
 resource "aws_iam_policy" "trail_writer" {
   count       = var.cloud_trail_count
-  name        = "trail_write_to_cw_${data.aws_cloudwatch_log_group.logs_destination.name}"
-  description = "Read or write     ${data.aws_cloudwatch_log_group.logs_destination.name}"
-  policy      = data.aws_iam_policy_document.trail_policy.json
+  name        = "trail_write_to_cw_${data.aws_cloudwatch_log_group.logs_destination[count.index].name}"
+  description = "Read or write     ${data.aws_cloudwatch_log_group.logs_destination[count.index].name}"
+  policy      = data.aws_iam_policy_document.trail_policy[count.index].json
 }
 
 resource "aws_iam_role_policy_attachment" "trail_writer_role" {
@@ -163,7 +163,7 @@ resource "aws_cloudtrail" "logger_trail" {
   s3_key_prefix                 = "trailLogs"
   include_global_service_events = false
   cloud_watch_logs_role_arn     = aws_iam_role.cloudtrail_writer.*.arn[count.index]
-  cloud_watch_logs_group_arn    = data.aws_cloudwatch_log_group.logs_destination.arn
+  cloud_watch_logs_group_arn    = data.aws_cloudwatch_log_group.logs_destination[count.index].arn
 
   event_selector {
     read_write_type = "All"

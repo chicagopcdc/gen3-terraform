@@ -118,9 +118,13 @@ fi
   if [[ ! -z "${var.slack_webhook}" ]]; then
     echo "${var.slack_webhook}" > /slackWebhook
   fi
-  git clone https://github.com/uc-cdis/cloud-automation.git
+  git clone https://github.com/chicagopcdc/cloud-automation.git
   cd $CLOUD_AUTOMATION
   git pull
+
+  git fetch
+  git checkout test-update-cert
+
 
   # This is needed temporarily for testing purposes ; before merging the code to master
   if [ "${var.branch}" != "master" ];

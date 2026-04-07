@@ -9,6 +9,7 @@ data "aws_iam_policy_document" "sns-topic-policy" {
   policy_id = "__default_policy_ID"
 
   statement {
+    sid = "__default_statement_ID"
     actions = [
       "SNS:Subscribe",
       "SNS:Receive",
@@ -16,25 +17,27 @@ data "aws_iam_policy_document" "sns-topic-policy" {
       "SNS:ListSubscriptionsByTopic",
       "SNS:GetTopicAttributes",
     ]
-
-    condition {
-      test     = "ArnLike"
-      variable = "aws:SourceArn"
-      values    = [
-        "arn:aws:s3:*:*:${var.bucket_name}",
-      ]
-    }
     effect = "Allow"
-
     principals {
       type        = "AWS"
       identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
+    resources = [aws_sns_topic.user_updates.arn]
+  }
 
-    resources = [
-      aws_sns_topic.user_updates.arn,
-    ]
-
-    sid = "__default_statement_ID"
+  statement {
+    sid     = "s3_publish_statement_ID"
+    actions = ["SNS:Publish"]
+    effect  = "Allow"
+    principals {
+      type        = "Service"
+      identifiers = ["s3.amazonaws.com"]
+    }
+    condition {
+      test     = "ArnLike"
+      variable = "aws:SourceArn"
+      values   = ["arn:aws:s3:*:*:${var.bucket_name}"]
+    }
+    resources = [aws_sns_topic.user_updates.arn]
   }
 }
