@@ -1,5 +1,6 @@
 output "bot_secret" {
-  value = aws_iam_access_key.bot_user_key.secret
+  value     = aws_iam_access_key.bot_user_key.secret
+  sensitive = true
 }
 
 output "bot_id" {

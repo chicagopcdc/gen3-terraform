@@ -40,3 +40,22 @@ provider "helm" {
     }
   }
 }
+
+provider "aws" {
+
+  region = local.aws_region
+
+  default_tags {
+    tags = local.default_tags
+  }
+}
+
+# Same account, same region - required for csoc_managed = true
+provider "aws" {
+  alias  = "csoc"
+  region = local.aws_region
+
+  default_tags {
+    tags = local.default_tags
+  }
+}

@@ -10,5 +10,4 @@ resource "aws_secretsmanager_secret_version" "amanuensis_config" {
     amanuensis_secret_key = var.amanuensis_secret_key
     data_release_bucket   = var.data_release_bucket
   })
-
 }
