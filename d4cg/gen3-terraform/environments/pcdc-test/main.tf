@@ -99,15 +99,16 @@ module "commons" {
   force_delete_bucket               = true
   enable_vpc_endpoints              = false
   cluster_engine_version            = "13"
-  deploy_es                         = false
-  deploy_es_role                    = false
+  deploy_es                         = true
+  deploy_es_role                    = true
   
   ha_squid_single_instance          = false
   peering_cidr                      = local.peering_cidr
   peering_vpc_id                    = local.peering_vpc_id
-  csoc_managed                       = local.csoc_managed
+  csoc_managed                      = local.csoc_managed
   csoc_account_id                   = local.csoc_account_id
   #Maybe disable after argo cd is running and rerun terraform apply to handoff control to argo cd
+  deploy_argocd                     = true
   deploy_external_secrets_operator  = false
   deploy_karpenter_in_k8s           = true
   
@@ -167,9 +168,14 @@ module "pcdc_dev" {
   source = "./../../modules/pcdc"
   vpc_name                 = local.vpc_name
   hostname                 = local.hostname
+  aurora_username          = module.commons.aurora_cluster_master_username
+  aurora_password          = module.commons.aurora_cluster_master_password
   providers = {
     aws      = aws
   }
+  depends_on = [
+    module.commons,
+  ]
 }
 
 
