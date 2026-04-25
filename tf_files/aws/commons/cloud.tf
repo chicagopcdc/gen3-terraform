@@ -87,7 +87,7 @@ resource "aws_route" "for_peering" {
 }
 
 resource "aws_route" "for_squid_lambda" {
-  count                     = var.csoc_managed ? 1 : 0
+  count                     = (var.csoc_managed || var.deploy_ha_squid) ? 1 : 0
   route_table_id            = aws_route_table.private_kube.id
   destination_cidr_block    = "0.0.0.0/0"
   nat_gateway_id            = module.cdis_vpc.nat_gw_id

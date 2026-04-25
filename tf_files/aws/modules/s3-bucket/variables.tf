@@ -11,6 +11,12 @@ variable "cloud_trail_count" {
   description = "Number of cloud trails to create - Limited to 5 trails per region"
 }
 
+variable "manage_lifecycle" {
+  description = "Set to false to disable the lifecycle configuration so it can be managed by the calling module"
+  type        = bool
+  default     = true
+}
+
 locals {
   clean_bucket_name = replace(replace(var.bucket_name, "_", "-"),".", "-")
 }
