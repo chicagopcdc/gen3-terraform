@@ -122,9 +122,6 @@ fi
   cd $CLOUD_AUTOMATION
   git pull
 
-  git fetch
-  git checkout test-update-cert
-
 
   # This is needed temporarily for testing purposes ; before merging the code to master
   if [ "${var.branch}" != "master" ];

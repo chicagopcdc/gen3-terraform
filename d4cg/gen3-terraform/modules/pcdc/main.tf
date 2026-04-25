@@ -1,7 +1,9 @@
 module "amanuensis-data-release-bucket" {
   count    = var.amanuensis_enabled ? 1 : 0
-  source   = "../amanuensis-data-release-bucket"
+  source   = "../d4cg-bucket"
+  bucket_suffix = "data-release"
   vpc_name = var.vpc_name
+  manage_lifecycle  = true
 }
 
 module "amanuensis-bot-user" {
