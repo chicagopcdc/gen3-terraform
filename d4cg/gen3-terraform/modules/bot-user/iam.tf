@@ -1,4 +1,3 @@
-# bot
 
 ## bot user
 resource "aws_iam_user" "bot" {
@@ -19,10 +18,7 @@ resource "aws_iam_user_policy" "bot_policy" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Action": [
-        "s3:PutObject",
-        "s3:GetObject"
-      ],
+      "Action": ${jsonencode(var.bot_object_actions)},
       "Effect": "Allow",
       "Resource": ["${data.aws_s3_bucket.data-bucket.arn}/*"]
     },

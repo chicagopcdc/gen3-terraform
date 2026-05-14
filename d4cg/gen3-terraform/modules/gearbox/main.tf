@@ -35,20 +35,24 @@ module "gearbox-g3auto" {
   count = var.gearbox_enabled ? 1 : 0
   source = "../gearbox-g3auto"
   vpc_name = var.vpc_name
-  hostname = var.hostname
   gearbox_g3auto_access_key = module.gearbox-bot-user[0].bot_id
   gearbox_g3auto_secret_key = module.gearbox-bot-user[0].bot_secret
-  data_release_bucket = module.gearbox-match-conditions-bucket[0].bucket_name
-  gearbox_g3auto_config_path = var.gearbox_g3auto_config_path
   prod_promotion_role_arn = var.prod_promotion_role_arn
-  s3_prod_bucket_name = var.s3_prod_bucket_name
-  gearbox_g3auto_allowed_issuers = var.gearbox_g3auto_allowed_issuers
-  gearbox_g3auto_user_api = var.gearbox_g3auto_user_api
-  gearbox_g3auto_force_issuer = var.gearbox_g3auto_force_issuer
-  gearbox_g3auto_testing = var.gearbox_g3auto_testing
-  gearbox_g3auto_debug = var.gearbox_g3auto_debug
-  gearbox_g3auto_enabled_phi = var.gearbox_g3auto_enabled_phi
-  gearbox_g3auto_dummy_s3 = var.gearbox_g3auto_dummy_s3
-  gearbox_middleware_path = var.gearbox_middleware_path
-  region = var.region
+}
+
+module "gearbox-middleware-bot-user" {
+  count                   = var.gearbox_enabled ? 1 : 0
+  source                  = "../bot-user"
+  vpc_name                = var.vpc_name
+  bot_name                = "gearbox-middleware"
+  bucket_name             = module.gearbox-match-conditions-bucket[0].bucket_name
+  bot_object_actions      = ["s3:GetObject"]
+}
+
+module "gearbox-middleware-g3auto" {
+  count = var.gearbox_enabled ? 1 : 0
+  source = "../gearbox-middleware-g3auto"
+  vpc_name = var.vpc_name
+  gearbox_middleware_g3auto_access_key = module.gearbox-middleware-bot-user[0].bot_id
+  gearbox_middleware_g3auto_secret_key = module.gearbox-middleware-bot-user[0].bot_secret
 }

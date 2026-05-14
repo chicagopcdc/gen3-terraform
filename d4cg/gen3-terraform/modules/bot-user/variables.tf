@@ -26,3 +26,11 @@ variable "is_gearbox_staging" {
 variable "is_gearbox_prod" {
   default = false
 }
+
+variable "bot_object_actions" {
+  type = list(string)
+  default = [
+    "s3:PutObject",
+    "s3:GetObject",
+  ]
+}
