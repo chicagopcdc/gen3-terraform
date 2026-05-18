@@ -19,7 +19,7 @@ module "commons_vpc_es" {
   deploy_cloudwatch_alarm   = var.deploy_cloudwatch_alarm
   slack_webhook_secret_name = var.slack_webhook_secret_name
   es_name                   = var.es_name
-  depends_on              = [module.cdis_vpc.vpc_id, module.cdis_vpc.vpc_peering_id]
+  depends_on              = [module.cdis_vpc.vpc_id, aws_iam_role.esproxy-role]
 }
 
 

@@ -6,7 +6,7 @@ locals {
       arborist_enabled = var.arborist_enabled
       argo_enabled = var.argo_enabled
       audit_enabled = var.audit_enabled
-      audit_service_account = aws_iam_role.audit-role[0].arn
+      audit_service_account = var.audit_enabled ? aws_iam_role.audit-role[0].arn : ""
       aurora_hostname = var.aurora_hostname
       aurora_username = var.aurora_username
       aurora_password = var.aurora_password
@@ -33,7 +33,7 @@ locals {
       gen3ff_tag = var.gen3ff_tag
       guppy_enabled = var.guppy_enabled
       hatchery_enabled = var.hatchery_enabled
-      hatchery_service_account = aws_iam_role.hatchery-role[0].arn
+      hatchery_service_account = var.hatchery_enabled ? aws_iam_role.hatchery-role[0].arn : ""
       hostname = var.hostname
       indexd_enabled = var.indexd_enabled
       indexd_prefix = var.indexd_prefix

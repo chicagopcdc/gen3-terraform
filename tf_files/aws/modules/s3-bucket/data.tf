@@ -23,13 +23,15 @@ data "aws_iam_policy_document" "mybucket_writer" {
 
 # let's send the logs to cloudwatch as well
 data "aws_cloudwatch_log_group" "logs_destination" {
-  name = var.environment
+  count = tonumber(var.cloud_trail_count)
+  name  = var.environment
 }
 
 data "aws_iam_policy_document" "trail_policy" {
+  count = tonumber(var.cloud_trail_count)
   statement {
     effect    = "Allow"
     actions = ["logs:CreateLogStream","logs:PutLogEvents"]
-    resources = [data.aws_cloudwatch_log_group.logs_destination.arn]
+    resources = [data.aws_cloudwatch_log_group.logs_destination[count.index].arn]
   }
 }

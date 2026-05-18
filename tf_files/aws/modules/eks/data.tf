@@ -117,8 +117,9 @@ data "aws_instances" "squid_proxy" {
 }
 
 # get the private kube table id
-data "aws_route_table" "private_kube_route_table" {
-  vpc_id      = data.aws_vpc.the_vpc.id
+# Using plural data source so it returns an empty list (instead of erroring) when the route table doesn't exist (e.g. during destroy)
+data "aws_route_tables" "private_kube_route_table" {
+  vpc_id = data.aws_vpc.the_vpc.id
   tags = {
     Name = "private_kube"
   }
@@ -151,7 +152,7 @@ data "aws_iam_policy_document" "with_resources" {
     effect = "Allow"
     resources = [
       "arn:aws:ec2:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:route-table/${aws_route_table.eks_private.id}",
-      "arn:aws:ec2:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:route-table/${data.aws_route_table.private_kube_route_table.id}",
+      "arn:aws:ec2:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:route-table/${length(data.aws_route_tables.private_kube_route_table.ids) > 0 ? tolist(data.aws_route_tables.private_kube_route_table.ids)[0] : "*"}",
       "arn:aws:route53:::hostedzone/${data.aws_route53_zone.vpczone.zone_id}"
     ]
   }
