@@ -359,6 +359,11 @@ variable "fence-bot_bucket_access_arns" {
   default     = []
 }
 
+variable "amanuensis-bot_bucket_access_arns" {
+  description = "When amanuensis bot has to access another bucket that wasn't created by the VPC module"
+  default     = []
+}
+
 variable "deploy_ha_squid" {
   description = "Should you want to deploy HA-squid"
   default     = false
@@ -750,6 +755,12 @@ variable "skip_final_snapshot" {
   description = "Determines whether a final DB snapshot is created before the DB cluster is deleted"
   type        = bool
   default     = false
+}
+
+variable "aurora_snapshot_identifier" {
+  type        = string
+  description = "The name of your final DB snapshot when this DB cluster is deleted"
+  default     = ""
 }
 
 variable "final_snapshot_identifier" {

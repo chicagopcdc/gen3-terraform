@@ -22,6 +22,7 @@ locals {
       dispatcher_job_number = var.dispatcher_job_number
       es_endpoint = var.es_endpoint
       es_secret_name = aws_secretsmanager_secret.es_user_creds.name
+      amanuensis_config_secret_name = aws_secretsmanager_secret.amanuensis_config.name
       fence_config_secret_name = aws_secretsmanager_secret.fence_config.name
       fence_enabled = var.fence_enabled
       fence_jwt_keys = aws_secretsmanager_secret.fence-jwt-keys.name

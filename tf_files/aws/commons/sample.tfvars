@@ -182,6 +182,8 @@ fips=false
 branch="master" 
 # When fence bot has to access another bucket that wasn't created by the VPC module.
 fence-bot_bucket_access_arns=[] 
+# When amanuensis bot has to access another bucket that wasn't created by the VPC module.
+amanuensis-bot_bucket_access_arns=[]
 ## Legacy configuration, only used for legacy setups, new deployments can most likely ignore.
 # Configuration for gdcapi oauth client.
 gdcapi_oauth2_client_id="" 
