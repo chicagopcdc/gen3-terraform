@@ -132,6 +132,8 @@ module "gen3" {
   cognito_discovery_url    = "https://${aws_cognito_user_pool.cognito_pool[0].endpoint}/.well-known/openid-configuration"
   cognito_client_id        = aws_cognito_user_pool_client.cognito_client[0].id
   cognito_client_secret    = aws_cognito_user_pool_client.cognito_client[0].client_secret
+  gitops_repo              = "https://github.com/chicagopcdc/gen3-gitops"
+  helm_repo                = "https://github.com/chicagopcdc/gen3-helm"
 
   providers = {
     helm       = helm
