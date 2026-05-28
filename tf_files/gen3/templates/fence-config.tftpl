@@ -20,9 +20,17 @@ OPENID_CONNECT:
     client_secret: "${google_client_secret}"
   cognito:
     # You must create a user pool in order to have a discovery url
-    discovery_url: '${cognito_discovery_url}'
-    client_id: "${cognito_client_id}"
-    client_secret: "${cognito_client_secret}"
+    %{ if cognito_discovery_url != null }
+    DISCOVERY_URL = "${cognito_discovery_url}"
+    %{ endif }
+
+    %{ if cognito_client_id != null }
+    CLIENT_ID = "${cognito_client_id}"
+    %{ endif }
+
+    %{ if cognito_client_secret != null }
+    CLIENT_SECRET = "${cognito_client_secret}"
+    %{ endif }
     redirect_url: '{{BASE_URL}}/login/cognito/login/'
     scope: 'openid email'
     # In the case where Cognito is being used solely as an intermediary to a single IdP,
