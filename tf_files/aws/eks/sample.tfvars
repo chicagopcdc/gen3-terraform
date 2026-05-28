@@ -32,7 +32,7 @@ users_policy= ""
 worker_drive_size = 30
 
 #The EKS version this cluster should run against
-eks_version = "1.16"
+eks_version = "1.35"
 
 #Whether you want your workers on a /24 or /23 subnet, /22 is available, but the VPC module should have been deployed 
 #using the `network_expansion = true` variable, otherwise wks will fail

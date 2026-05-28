@@ -2,7 +2,7 @@
 
 variable "eks_version" {
   description = "value for eks version"
-  default     = "1.24"
+  default     = "1.35"
 }
 variable "region" {
   description = "value for region"
