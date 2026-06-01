@@ -73,6 +73,7 @@ locals {
 
 module "commons" {
   source = "../../../../tf_files/aws/commons"
+  karpenter_version                 = 1.9.0 
   vpc_name                          = local.vpc_name
   vpc_cidr_block                    = "10.10.0.0/20"
   aws_region                        = local.aws_region

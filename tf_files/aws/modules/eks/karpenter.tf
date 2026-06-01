@@ -101,7 +101,7 @@ data "aws_iam_policy_document" "irsa" {
       "sqs:ReceiveMessage",
     ]
     effect   = "Allow"
-    resources = ["arn:aws:sqs:*:${local.account_id}:karpenter-sqs-vpc_name"]
+    resources = [aws_sqs_queue.this[0].arn]
   }
 
   statement {
@@ -282,6 +282,30 @@ resource "aws_iam_role_policy_attachment" "karpenter-role-policy" {
   role       = aws_iam_role.karpenter.0.name
 }
 
+resource "helm_release" "karpenter_crd" {
+  count            = var.k8s_bootstrap_resources && var.use_karpenter && var.deploy_karpenter_in_k8s ? 1 : 0
+  namespace        = "karpenter"
+  create_namespace = true
+  name             = "karpenter-crd"
+  repository       = "oci://public.ecr.aws/karpenter"
+  chart            = "karpenter-crd"
+  version          = var.karpenter_version
+
+  set {
+    name  = "webhook.enabled"
+    value = "false"
+  }
+
+  set {
+    name  = "webhook.serviceNamespace"
+    value = "karpenter"
+  }
+
+  lifecycle {
+    ignore_changes = all
+  }
+}
+
 resource "helm_release" "karpenter" {
   count               = var.k8s_bootstrap_resources && var.use_karpenter && var.deploy_karpenter_in_k8s ? 1 : 0
   namespace           = "karpenter"
@@ -292,6 +316,7 @@ resource "helm_release" "karpenter" {
   # repository_password = data.aws_ecrpublic_authorization_token.token.password
   chart               = "karpenter"
   version             = var.karpenter_version
+  skip_crds           = true
 
   set {
     name  = "settings.clusterName"
@@ -314,7 +339,7 @@ resource "helm_release" "karpenter" {
   }
 
   set {
-    name  = "settings.aws.interruptionQueueName"
+    name  = "settings.interruptionQueue"
     value = aws_sqs_queue.this[0].name
   }
 
@@ -323,7 +348,30 @@ resource "helm_release" "karpenter" {
     value = "Default"
   }
 
-  depends_on = [time_sleep.wait_60_seconds]
+  set {
+    name  = "controller.resources.requests.cpu"
+    value = "1"
+  }
+
+  set {
+    name  = "controller.resources.requests.memory"
+    value = "1Gi"
+  }
+
+  set {
+    name  = "controller.resources.limits.cpu"
+    value = "1"
+  }
+
+  set {
+    name  = "controller.resources.limits.memory"
+    value = "1Gi"
+  }
+
+  depends_on = [
+    time_sleep.wait_60_seconds,
+    helm_release.karpenter_crd,
+  ]
 
   lifecycle {
     ignore_changes = all
@@ -377,7 +425,7 @@ resource "kubectl_manifest" "karpenter_node_pool" {
   YAML
 
   depends_on = [
-    helm_release.karpenter
+    kubectl_manifest.karpenter_node_class,
   ]
 
   lifecycle {
@@ -451,7 +499,8 @@ resource "kubectl_manifest" "karpenter_node_class" {
   YAML
 
   depends_on = [
-    helm_release.karpenter
+    helm_release.karpenter,
+    helm_release.karpenter_crd,
   ]
 
   lifecycle {
