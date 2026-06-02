@@ -282,6 +282,7 @@ resource "aws_iam_role_policy_attachment" "karpenter-role-policy" {
   role       = aws_iam_role.karpenter.0.name
 }
 
+
 resource "helm_release" "karpenter" {
   count               = var.k8s_bootstrap_resources && var.use_karpenter && var.deploy_karpenter_in_k8s ? 1 : 0
   namespace           = "karpenter"
@@ -323,7 +324,10 @@ resource "helm_release" "karpenter" {
     value = "Default"
   }
 
-  depends_on = [time_sleep.wait_60_seconds]
+  depends_on = [
+    time_sleep.wait_60_seconds
+  ]
+
 
   lifecycle {
     ignore_changes = all
