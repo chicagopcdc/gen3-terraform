@@ -46,9 +46,12 @@ LOGIN_OPTIONS: # [] # !!! remove the empty list to enable login options!
   - name: 'Login from Google'
     desc: ''
     idp: google
+  %{ if cognito_client_id != null }
   - name: 'Login from Cognito'
     desc: ''
-    idp: cognito    
+    idp: cognito
+  %{ endif }
+      
 
 AWS_CREDENTIALS:
   'fence-bot':
